@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/timeManagerFragment"
+        android:name="com.example.someproj.fragments.time_manager.TimeManagerFragment"
+        android:label="@string/notificator"
+        tools:layout="@layout/fragment_time_manager" >
+        <action
+            android:id="@+id/action_timeManagerFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_timeManagerFragment_to_countDownTimerFragment"
+            app:destination="@id/countDownTimerFragment" />
+        <action
+            android:id="@+id/action_timeManagerFragment_to_timerFragment"
+            app:destination="@id/timerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setTaskFragment"
+        android:name="com.example.someproj.fragments.task_manager.SetTaskFragment"
+        android:label="@string/create_task"
+        tools:layout="@layout/fragment_set_task" >
+        <action
+            android:id="@+id/action_setTaskFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.someproj.fragments.task_manager.ListTaskFragment"
+        android:label="@string/list_of_tasks"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_timeManagerFragment"
+            app:destination="@id/timeManagerFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_setTaskFragment"
+            app:destination="@id/setTaskFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_countDownTimerFragment"
+            app:destination="@id/countDownTimerFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_timerFragment"
+            app:destination="@id/timerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countDownTimerFragment"
+        android:name="com.example.someproj.fragments.countdowntimer.CountDownTimeFragment"
+        android:label="fragment_count_down_time"
+        tools:layout="@layout/fragment_count_down_time" >
+        <action
+            android:id="@+id/action_countDownTimerFragment_to_timeManagerFragment"
+            app:destination="@id/timeManagerFragment" />
+        <action
+            android:id="@+id/action_countDownTimerFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.example.someproj.fragments.timer.TimerFragment"
+        android:label="fragment_timer"
+        tools:layout="@layout/fragment_timer" >
+        <action
+            android:id="@+id/action_timerFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_timerFragment_to_timeManagerFragment"
+            app:destination="@id/timeManagerFragment" />
+        <action
+            android:id="@+id/action_timerFragment_to_countDownTimerFragment"
+            app:destination="@id/countDownTimerFragment" />
+    </fragment>
+</navigation>

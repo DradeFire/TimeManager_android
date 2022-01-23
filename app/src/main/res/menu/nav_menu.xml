@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/manager_title">
+        <menu>
+            <item android:title="@string/notificator" android:id="@+id/notifTimeManager" android:icon="@drawable/ic_add_alarm"/>
+            <item android:title="@string/list_of_tasks" android:id="@+id/notifManager" android:icon="@drawable/ic_dela"/>
+            <item android:title="@string/timer" android:id="@+id/notifTimer" android:icon="@drawable/ic_baseline_timelapse_24"/>
+            <item android:title="@string/seconder" android:id="@+id/notifSeconder" android:icon="@drawable/ic_timer"/>
+        </menu>
+    </item>
+
+</menu>
