@@ -1,7 +1,8 @@
-package com.example.someproj.datamodel
+package com.example.someproj.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.graphics.drawable.Drawable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.someproj.di.App
@@ -21,6 +22,16 @@ val Context.appComponent: AppComponent
     }
 
 class DataModel @ViewModelInject constructor(application: Application): AndroidViewModel(application) {
+
+    var second_time: Int? = null
+    var second_running: Boolean? = null
+    var second_startPause: String? = null
+    var second_startPauseImg: Drawable? = null
+
+    var countDown_timerInMills: Long? = null
+    var countDown_isTurn: Boolean? = null
+    var countDown_canStart: Boolean? = null
+    var countDown_startStopbt: String? = null
 
     var readAllData: LiveData<List<Task>>
     @Inject

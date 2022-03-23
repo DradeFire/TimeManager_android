@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.someproj.R
 import com.example.someproj.databinding.FragmentSetTaskBinding
-import com.example.someproj.datamodel.DataModel
+import com.example.someproj.viewmodel.DataModel
 import com.example.someproj.roomdb.model.Task
 import java.util.*
 import javax.inject.Inject

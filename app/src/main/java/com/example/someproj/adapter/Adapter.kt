@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.someproj.R
 import com.example.someproj.databinding.ItemListBinding
-import com.example.someproj.datamodel.DataModel
+import com.example.someproj.viewmodel.DataModel
 import com.example.someproj.roomdb.model.Task
 import javax.inject.Inject
 

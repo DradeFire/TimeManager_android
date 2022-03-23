@@ -11,7 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import android.app.Application
-import com.example.someproj.datamodel.DataModel
+import com.example.someproj.viewmodel.DataModel
 import com.example.someproj.fragments.task_manager.ListTaskFragment
 import com.example.someproj.fragments.time_manager.TimeManagerFragment
 import com.example.someproj.fragments.timer.TimerFragment

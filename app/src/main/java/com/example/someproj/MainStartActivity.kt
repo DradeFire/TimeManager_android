@@ -19,9 +19,8 @@ import com.example.someproj.di.AppComponent
 import com.example.someproj.alarm.AlarmReceiver
 import com.example.someproj.consts.Const
 import com.example.someproj.databinding.ActivityMainBinding
-import com.example.someproj.datamodel.DataModel
+import com.example.someproj.viewmodel.DataModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import javax.inject.Inject
 
 val Context.appComponent: AppComponent
@@ -119,38 +118,39 @@ class MainStartActivity : AppCompatActivity() {
     @Inject
     @SuppressLint("UnspecifiedImmutableFlag")
     fun calendarObserve() {
-        dataModel.calendar.observe(this@MainStartActivity, {
-            binding.apply {
+        dataModel.calendar.observe(this) {
+            val calendar = dataModel.calendar.value!!
+            val alarmManager: AlarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+            val alarmClockInfo =
+                AlarmClockInfo(calendar.timeInMillis, getAlarmInfoPendingIntent())
+            alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
 
-                val calendar = dataModel.calendar.value!!
-                val alarmManager: AlarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-                val alarmClockInfo =
-                    AlarmClockInfo(calendar.timeInMillis, getAlarmInfoPendingIntent())
-                alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
+            val intent = Intent(this@MainStartActivity, AlarmReceiver::class.java)
+            intent.putExtra(Const.MESS, dataModel.message.value)
 
-                val intent = Intent(this@MainStartActivity, AlarmReceiver::class.java)
-                intent.putExtra(Const.MESS, dataModel.message.value)
-
-                val pendingIntent = PendingIntent
-                    .getBroadcast(
-                        this@MainStartActivity,
-                        Const.REQUEST_CODE_GET_ALARM_INFO,
-                        intent,
-                        FLAG_UPDATE_CURRENT
-                    )
-
-                alarmManager.setInexactRepeating(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.timeInMillis,
-                    AlarmManager.INTERVAL_DAY,
-                    pendingIntent
+            val pendingIntent = PendingIntent
+                .getBroadcast(
+                    this@MainStartActivity,
+                    Const.REQUEST_CODE_GET_ALARM_INFO,
+                    intent,
+                    FLAG_UPDATE_CURRENT
                 )
 
-                Toast.makeText(this@MainStartActivity,
-                    getString(R.string.success),
-                    Toast.LENGTH_SHORT).show()
-            }
-        })
+            alarmManager.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+
+            Toast.makeText(
+                this@MainStartActivity,
+                getString(R.string.success),
+                Toast.LENGTH_SHORT
+            ).show()
+
+        }
+
     }
 
 }

@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/countDownTimerFragment"
         android:name="com.example.someproj.fragments.countdowntimer.CountDownTimeFragment"
-        android:label="fragment_count_down_time"
+        android:label="Таймер"
         tools:layout="@layout/fragment_count_down_time" >
         <action
             android:id="@+id/action_countDownTimerFragment_to_timeManagerFragment"
@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/timerFragment"
         android:name="com.example.someproj.fragments.timer.TimerFragment"
-        android:label="fragment_timer"
+        android:label="Секундомер"
         tools:layout="@layout/fragment_timer" >
         <action
             android:id="@+id/action_timerFragment_to_listFragment"

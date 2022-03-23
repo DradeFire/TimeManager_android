@@ -7,27 +7,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.someproj.R
 import com.example.someproj.appComponent
 import com.example.someproj.databinding.FragmentTimerBinding
+import com.example.someproj.viewmodel.DataModel
 import javax.inject.Inject
 
 class TimerFragment @Inject constructor() : Fragment() {
 
-    lateinit var binding: FragmentTimerBinding
+    private lateinit var binding: FragmentTimerBinding
+    private val viewModel: DataModel by viewModels()
     private var time = 0
-    var running: Boolean = false
+    private var running: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentTimerBinding.inflate(inflater, container, false)
-
         requireContext().appComponent.inject(this)
 
         return binding.root
+    }
+
+    @Inject
+    fun restoreAfterTurn() = with(viewModel) {
+        if(second_time != null)
+            time = second_time!!
+
+        if(second_running != null)
+            running = second_running!!
+
+        if(second_startPause != null)
+            binding.startStopButton.text = second_startPause
+
+        if(second_startPauseImg != null)
+            binding.startStopButton.icon = second_startPauseImg
     }
 
     @Inject
@@ -43,24 +59,27 @@ class TimerFragment @Inject constructor() : Fragment() {
         binding.resetButton.setOnClickListener { resetT() }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun startT(){
         running = true
+        binding.startStopButton.text = "Pause"
         binding.startStopButton.icon =
             requireActivity().getDrawable(R.drawable.ic_baseline_pause_24)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun stopT(){
         running = false
+        binding.startStopButton.text = "Start"
         binding.startStopButton.icon =
             requireActivity().getDrawable(R.drawable.ic_baseline_play_arrow_24)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun resetT(){
         running = false
         time = 0
+        binding.startStopButton.text = "Start"
         binding.startStopButton.icon =
             requireActivity().getDrawable(R.drawable.ic_baseline_play_arrow_24)
     }
@@ -83,9 +102,17 @@ class TimerFragment @Inject constructor() : Fragment() {
                     time++
                 }
 
-                handler.postDelayed(this, 1000)
+                handler.postDelayed(this, 990)
             }
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        viewModel.second_startPauseImg = binding.startStopButton.icon
+        viewModel.second_startPause = binding.startStopButton.text.toString()
+        viewModel.second_time = time
+        viewModel.second_running = running
+        super.onSaveInstanceState(outState)
     }
 
 }

@@ -14,7 +14,7 @@ import com.example.someproj.di.AppComponent
 import com.example.someproj.R
 import com.example.someproj.adapter.Adapter
 import com.example.someproj.databinding.FragmentListBinding
-import com.example.someproj.datamodel.DataModel
+import com.example.someproj.viewmodel.DataModel
 import com.example.someproj.roomdb.model.Task
 import javax.inject.Inject
 

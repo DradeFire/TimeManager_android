@@ -1,5 +1,6 @@
 package com.example.someproj.fragments.time_manager
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +11,7 @@ import androidx.fragment.app.viewModels
 import com.example.someproj.di.App
 import com.example.someproj.di.AppComponent
 import com.example.someproj.databinding.FragmentTimeManagerBinding
-import com.example.someproj.datamodel.DataModel
+import com.example.someproj.viewmodel.DataModel
 import java.util.*
 import javax.inject.Inject
 
@@ -25,8 +26,9 @@ class TimeManagerFragment @Inject constructor(): Fragment() {
     private lateinit var binding: FragmentTimeManagerBinding
     @Inject
     lateinit var date: Calendar
-    val dataModel: DataModel by viewModels()
+    private val dataModel: DataModel by viewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,9 +75,4 @@ class TimeManagerFragment @Inject constructor(): Fragment() {
         }
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() = TimeManagerFragment()
-    }
 }
